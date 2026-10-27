@@ -1,0 +1,45 @@
+{
+  "template_id": "default",
+  "description": "Generic agentic conversation template. Documents are delivered via simulated search_files/read_file tool-call cycles.",
+  "system_prompt_file": "agentic_system.txt",
+  "messages": [
+    {
+      "role": "human",
+      "content": "{task}"
+    },
+    {
+      "role": "assistant",
+      "content": "<think>\nThe user wants me to help with this task. Let me first search for relevant project documents to find the information I need.\n</think>\n<tool_call>\n{\"name\": \"search_files\", \"arguments\": {\"pattern\": \"*.*\", \"target\": \"files\", \"path\": \"docs\", \"limit\": 20}}\n</tool_call>"
+    },
+    {
+      "role": "tool",
+      "content": "<tool_response>\n{\"tool_call_id\": \"functions.search_files:0\", \"name\": \"search_files\", \"content\": {file_list}}\n</tool_response>"
+    },
+    {
+      "role": "assistant",
+      "content": "<think>\nI found some relevant documents. Let me read them to gather the information needed for the user's request.\n</think>\n<tool_call>\n{\"name\": \"read_file\", \"arguments\": {\"path\": \"docs/docA.txt\"}}\n</tool_call>"
+    },
+    {
+      "role": "tool",
+      "content": "<tool_response>\n{\"tool_call_id\": \"functions.read_file:1\", \"name\": \"read_file\", \"content\": {\"content\": \"{document1}\", \"total_lines\": 1, \"file_size\": 128, \"truncated\": false, \"is_binary\": false, \"is_image\": false}}\n</tool_response>"
+    },
+    {
+      "role": "assistant",
+      "content": "<think>\nI've read the first document. Let me now read the second one to get more context.\n</think>\n<tool_call>\n{\"name\": \"read_file\", \"arguments\": {\"path\": \"docs/docB.txt\"}}\n</tool_call>"
+    },
+    {
+      "role": "tool",
+      "content": "<tool_response>\n{\"tool_call_id\": \"functions.read_file:2\", \"name\": \"read_file\", \"content\": {\"content\": \"{document2}\", \"total_lines\": 1, \"file_size\": 128, \"truncated\": false, \"is_binary\": false, \"is_image\": false}}\n</tool_response>"
+    },
+    {
+      "role": "assistant",
+      "content": "<think>\nLet me also check the third document for additional context.\n</think>\n<tool_call>\n{\"name\": \"read_file\", \"arguments\": {\"path\": \"docs/docC.txt\"}}\n</tool_call>",
+      "role_filter": "D"
+    },
+    {
+      "role": "tool",
+      "content": "<tool_response>\n{\"tool_call_id\": \"functions.read_file:3\", \"name\": \"read_file\", \"content\": {\"content\": \"{distractor_document}\", \"total_lines\": 1, \"file_size\": 128, \"truncated\": false, \"is_binary\": false, \"is_image\": false}}\n</tool_response>",
+      "role_filter": "D"
+    }
+  ]
+}
