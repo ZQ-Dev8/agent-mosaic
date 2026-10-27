@@ -1,4 +1,22 @@
-# Agent Mosaic
+<p align="center">
+  <img src="assets/animation.gif" width="100%" alt="Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems" />
+</p>
+
+# 🔒 Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2610.30418"><img src="https://img.shields.io/badge/arXiv-2610.30418-b31b1b?logo=arxiv&amp;logoColor=white" alt="arXiv: 2610.30418" /></a>
+  <a href="https://huggingface.co/papers/2610.30418"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Paper-FFD21E" alt="Hugging Face Paper" /></a>
+  <a href="https://huggingface.co/datasets/ZQ-Dev/agent-mosaic-examples"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-FFD21E" alt="Hugging Face Dataset" /></a>
+  <a href="#install"><img src="https://img.shields.io/badge/Getting%20Started-Install-76B900" alt="Getting Started" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
+</p>
+
+## 📰 News
+
+- **2026-11-30** — Research repository released.
+
+## Introduction
 
 Collect and automatically score responses for the **Agent Mosaic benchmark**, from
 [Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems](https://arxiv.org/abs/2610.30418).
@@ -26,7 +44,7 @@ export OPENROUTER_API_KEY
 
 ## Install
 
-From this repository:
+Clone this repository, then:
 
 ```sh
 uv sync --locked
@@ -46,6 +64,7 @@ run; use `--resume` to continue an existing run with matching inputs and setting
 ```sh
 uv run --locked agent-mosaic simulate --dataset ZQ-Dev/agent-mosaic-examples \
   --generator gpt --out outputs/sim-gpt
+
 uv run --locked agent-mosaic score --dataset ZQ-Dev/agent-mosaic-examples \
   --responses outputs/sim-gpt --out outputs/scores-sim-gpt
 ```
@@ -71,9 +90,14 @@ Build the Pi and Hermes images locally:
 ```sh
 docker build --platform linux/arm64 -t agent-mosaic-pi:1.0.4 \
   -f containers/live_agents/pi.Dockerfile containers/live_agents
+
 docker build --platform linux/arm64 -t agent-mosaic-hermes:0.21.5 \
   -f containers/live_agents/hermes.Dockerfile containers/live_agents
+```
 
+Run the collections:
+
+```sh
 uv run --locked agent-mosaic live --dataset ZQ-Dev/agent-mosaic-examples \
   --harness pi --image agent-mosaic-pi:1.0.4 --out outputs/live-pi
 uv run --locked agent-mosaic live --dataset ZQ-Dev/agent-mosaic-examples \
