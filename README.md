@@ -2,7 +2,7 @@
   <img src="assets/animation.gif" width="100%" alt="Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems" />
 </p>
 
-# 🔒 Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems
+<h1 align="center">🔒 Agent Mosaic: Recognizing Confidentiality Leaks in Agentic LLM Systems</h1>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2610.30418"><img src="https://img.shields.io/badge/arXiv-2610.30418-b31b1b?logo=arxiv&amp;logoColor=white" alt="arXiv: 2610.30418" /></a>
@@ -14,7 +14,7 @@
 
 ## 📰 News
 
-- **2026-11-30** — Research repository released.
+- **2026-10-30** — Research repository released.
 
 ## Introduction
 
@@ -33,9 +33,10 @@ final answers with the paper's automated judge.
 The workflows use the paper's model profiles and harness configurations, listed
 below. The paper used a 65,536-token serving ceiling.
 
-**Collection and scoring cost money.** This repo assumes you manage spending through your
-OpenRouter account, keep API keys private, and inspect run outputs before sharing.
-Supply the key through your runtime environment. In Bash or Zsh:
+> [!NOTE]
+> **Collection and scoring cost money.** This repo assumes you manage spending through your
+> OpenRouter account, keep API keys private, and inspect run outputs before sharing.
+> Supply the key through your runtime environment. In Bash or Zsh:
 
 ```bash
 read -r -s OPENROUTER_API_KEY
@@ -100,11 +101,13 @@ Run the collections:
 ```sh
 uv run --locked agent-mosaic live --dataset ZQ-Dev/agent-mosaic-examples \
   --harness pi --image agent-mosaic-pi:1.0.4 --out outputs/live-pi
+
 uv run --locked agent-mosaic live --dataset ZQ-Dev/agent-mosaic-examples \
   --harness hermes --image agent-mosaic-hermes:0.21.5 --out outputs/live-hermes
 
 uv run --locked agent-mosaic score --dataset ZQ-Dev/agent-mosaic-examples \
   --responses outputs/live-pi --out outputs/scores-live-pi
+  
 uv run --locked agent-mosaic score --dataset ZQ-Dev/agent-mosaic-examples \
   --responses outputs/live-hermes --out outputs/scores-live-hermes
 ```
