@@ -14,7 +14,7 @@
 
 ## 📰 News
 
-- **2026-10-30** — Research repository released.
+- **2026-10-27** — Research repository released.
 
 ## Introduction
 
@@ -107,7 +107,7 @@ uv run --locked agent-mosaic live --dataset ZQ-Dev/agent-mosaic-examples \
 
 uv run --locked agent-mosaic score --dataset ZQ-Dev/agent-mosaic-examples \
   --responses outputs/live-pi --out outputs/scores-live-pi
-  
+
 uv run --locked agent-mosaic score --dataset ZQ-Dev/agent-mosaic-examples \
   --responses outputs/live-hermes --out outputs/scores-live-hermes
 ```
